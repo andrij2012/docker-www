@@ -1,0 +1,15 @@
+nginx:
+  build: ./nginx
+  ports:
+    - "80:80"
+    - "443:443"
+  links:
+    - "php70"
+  volumes:
+    - "/home/andriy/www:/usr/share/nginx/html"
+  restart: always
+  tty: true
+php70:
+  build: ./php70
+  ports:
+    - "9000:9000"
