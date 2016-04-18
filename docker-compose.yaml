@@ -5,11 +5,30 @@ nginx:
     - "443:443"
   links:
     - "php70"
-  volumes:
-    - "/home/andriy/www:/usr/share/nginx/html"
+  volumes_from:
+    - htdocs
   restart: always
-  tty: true
+
+mysql56:
+  build: ./mysql56
+  ports:
+    - "3306:3306"
+  environment:
+    MYSQL_ROOT_PASSWORD: root
+  volumes_from:
+    - htdocs
+
 php70:
   build: ./php70
+  volumes_from:
+    - htdocs
+  links:
+    - mysql56
   ports:
     - "9000:9000"
+
+htdocs:
+  build: ./htdocs
+  volumes:
+    - "/home/andriy/www:/var/www"
+  tty: true
