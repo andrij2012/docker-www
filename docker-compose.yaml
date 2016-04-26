@@ -3,6 +3,8 @@ nginx:
   ports:
     - "80:80"
     - "443:443"
+  volumes:
+    - "./nginx/logs:/var/log/nginx:rw"
   links:
     - "php70"
   volumes_from:
@@ -15,6 +17,8 @@ mysql56:
     - "3306:3306"
   environment:
     MYSQL_ROOT_PASSWORD: root
+  volumes:
+    - "./mysql56/data:/var/lib/mysql:rw"
   volumes_from:
     - htdocs
 
@@ -26,9 +30,11 @@ php70:
     - mysql56
   ports:
     - "9000:9000"
+  environment:
+    TERM: xterm
 
 htdocs:
   build: ./htdocs
   volumes:
-    - "/home/andriy/www:/var/www"
+    - "./htdocs:/var/www"
   tty: true
