@@ -27,7 +27,7 @@ mysql56:
 
 php70:
   build: ./php70
-  container_name: php70
+  container_name: php7-fpm
   volumes_from:
     - htdocs
   links:
@@ -39,7 +39,7 @@ php70:
 
 php56:
   build: ./php56
-  container_name: php56
+  container_name: php5-fpm
   volumes_from:
     - htdocs
   links:
