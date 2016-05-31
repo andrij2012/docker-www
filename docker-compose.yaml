@@ -1,5 +1,6 @@
 nginx:
   build: ./nginx
+  container_name: nginx
   ports:
     - "80:80"
     - "443:443"
@@ -14,6 +15,7 @@ nginx:
 
 mysql56:
   build: ./mysql56
+  container_name: mysql56
   ports:
     - "3306:3306"
   environment:
@@ -25,6 +27,7 @@ mysql56:
 
 php70:
   build: ./php70
+  container_name: php70
   volumes_from:
     - htdocs
   links:
@@ -36,6 +39,7 @@ php70:
 
 php56:
   build: ./php56
+  container_name: php56
   volumes_from:
     - htdocs
   links:
@@ -47,6 +51,7 @@ php56:
 
 htdocs:
   build: ./htdocs
+  container_name: htdocs
   volumes:
     - "./htdocs:/var/www"
   tty: true
