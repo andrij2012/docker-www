@@ -1,0 +1,16 @@
+#!/bin/sh
+
+RUN_CONTAINERS=$(docker inspect -f '{{.Name}}' $(docker ps -q) | cut -d'_' -f 2)
+
+if [ -z "$1" ]; then
+  echo "Name of container wasn't supplied. Currently running containers:"
+  echo "$RUN_CONTAINERS"
+fi
+
+# We don't need to show errors. So just rearrange error stream to /dev/null
+docker exec -it www_"$1"_1 bash 2>/dev/null
+
+if [ $? -ne 0 ]; then
+  echo "Container may not be run or doesn't exist. Currently running containers:"
+  echo "$RUN_CONTAINERS"
+fi

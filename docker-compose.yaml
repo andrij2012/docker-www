@@ -7,6 +7,7 @@ nginx:
     - "./nginx/logs:/var/log/nginx:rw"
   links:
     - "php70"
+    - "php56"
   volumes_from:
     - htdocs
   restart: always
@@ -24,6 +25,17 @@ mysql56:
 
 php70:
   build: ./php70
+  volumes_from:
+    - htdocs
+  links:
+    - mysql56
+  ports:
+    - "9001:9001"
+  environment:
+    TERM: xterm
+
+php56:
+  build: ./php56
   volumes_from:
     - htdocs
   links:
