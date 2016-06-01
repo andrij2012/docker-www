@@ -1,4 +1,5 @@
-htdocs/data
+htdocs/data/*
+!htdocs/data/.gitkeep
 mysql56/data
 nginx/logs
 nginx/sites-enabled/*
