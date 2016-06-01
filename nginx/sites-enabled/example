@@ -4,7 +4,7 @@ server {
   root /var/www;
   index index.php index.html index.htm;
 
-  server_name dzr.lh;
+  server_name example.org;
 
   location / {
     # This line is required
@@ -14,7 +14,9 @@ server {
   location ~ \.php$ {
     include fastcgi_params;
     fastcgi_split_path_info ^(.+\.php)(/.+)$;
-    fastcgi_pass  172.17.0.4:9000;
+    # To use php7 uncomment next line
+    # fastcgi_pass  php7-fpm;
+    fastcgi_pass  php5-fpm;
     fastcgi_index index.php;
     fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
   }

@@ -49,9 +49,21 @@ php56:
   environment:
     TERM: xterm
 
+phpmyadmin:
+  image: phpmyadmin/phpmyadmin
+  container_name: phpmyadmin
+  volumes_from:
+    - htdocs
+  ports:
+    - "8080:80"
+  links:
+    - mysql56
+  environment:
+    PMA_HOST: mysql56
+
 htdocs:
   build: ./htdocs
   container_name: htdocs
   volumes:
-    - "./htdocs:/var/www"
+    - "./htdocs/data:/var/www"
   tty: true

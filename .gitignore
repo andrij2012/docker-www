@@ -1,4 +1,5 @@
-htdocs/*
-!htdocs/Dockerfile
-
+htdocs/data
 mysql56/data
+nginx/logs
+nginx/sites-enabled/*
+!nginx/sites-enabled/example
