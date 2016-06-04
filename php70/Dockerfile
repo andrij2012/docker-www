@@ -4,7 +4,7 @@ RUN apt-get update && apt-get install -y apt-utils wget curl libfreetype6-dev li
  && rm -r /var/lib/apt/lists/*
 
 # Install required PHP extension
-RUN docker-php-ext-install -j$(nproc) mcrypt soap xml zip mysqli json \
+RUN docker-php-ext-install -j$(nproc) mcrypt soap xml zip mysqli json pdo_mysql \
  && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
  && docker-php-ext-install -j$(nproc) gd
 
@@ -21,4 +21,10 @@ WORKDIR /var/www
 RUN php -r "readfile('https://getcomposer.org/installer');" > composer-setup.php \
  && php composer-setup.php \
  && php -r "unlink('composer-setup.php');" \
- && mv composer.phar /usr/bin/composer
+ && mv composer.phar /usr/bin/composer \
+ && useradd -ms /bin/bash www
+
+USER www
+
+RUN composer global require "laravel/installer" \
+ && echo 'export PATH="$PATH:$HOME/.composer/vendor/bin"' >> ~/.bashrc
