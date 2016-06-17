@@ -9,6 +9,7 @@ nginx:
   links:
     - "php70"
     - "php56"
+    - "node"
   volumes_from:
     - htdocs
   restart: always
@@ -67,3 +68,19 @@ htdocs:
   volumes:
     - "./htdocs/data:/var/www"
   tty: true
+
+node:
+  build: ./node
+  container_name: node
+  volumes_from:
+    - htdocs
+  links:
+    - "redis:redis"
+  ports:
+    - "3000:3000"
+
+redis:
+  image: redis
+  container_name: redis
+  ports: 
+    - "6379:6379"
