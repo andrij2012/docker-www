@@ -21,4 +21,7 @@ WORKDIR /var/www
 RUN php -r "readfile('https://getcomposer.org/installer');" > composer-setup.php \
  && php composer-setup.php \
  && php -r "unlink('composer-setup.php');" \
- && mv composer.phar /usr/bin/composer
+ && mv composer.phar /usr/bin/composer \
+ && useradd -ms /bin/bash www
+
+USER www
