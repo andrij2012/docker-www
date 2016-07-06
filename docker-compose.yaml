@@ -6,10 +6,11 @@ nginx:
     - "443:443"
   volumes:
     - "./nginx/logs:/var/log/nginx:rw"
+    - "./nginx/sites-enabled:/etc/nginx/sites-enabled:rw"
   links:
     - "php70"
     - "php56"
-    - "node"
+    # - "node"
   volumes_from:
     - htdocs
   restart: always
@@ -69,18 +70,18 @@ htdocs:
     - "./htdocs/data:/var/www"
   tty: true
 
-node:
-  build: ./node
-  container_name: node
-  volumes_from:
-    - htdocs
-  links:
-    - "redis:redis"
-  ports:
-    - "3000:3000"
+# node:
+#   build: ./node
+#   container_name: node
+#   volumes_from:
+#     - htdocs
+#   links:
+#     - "redis:redis"
+#   ports:
+#     - "3000:3000"
 
-redis:
-  image: redis
-  container_name: redis
-  ports: 
-    - "6379:6379"
+# redis:
+#   image: redis
+#   container_name: redis
+#   ports: 
+#     - "6379:6379"
