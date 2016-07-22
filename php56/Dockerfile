@@ -11,9 +11,9 @@ RUN apt-get update && apt-get install -y apt-utils wget curl libfreetype6-dev li
  && pecl install imagick \
  && docker-php-ext-enable imagick
 
-COPY ./conf/www.conf /usr/local/etc/php-fpm.d/www.conf
-COPY ./conf/zz-docker.conf /usr/local/etc/php-fpm.d/zz-docker.conf
-COPY ./conf/php.ini /usr/local/etc/php/
+# COPY ./conf/www.conf /usr/local/etc/php-fpm.d/www.conf
+# COPY ./conf/zz-docker.conf /usr/local/etc/php-fpm.d/zz-docker.conf
+# COPY ./conf/php.ini /usr/local/etc/php/
 
 WORKDIR /var/www
 

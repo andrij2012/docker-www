@@ -18,8 +18,8 @@ RUN pecl install xdebug \
  # && docker-php-ext-enable gmagick \
  # && docker-php-ext-enable imagick
 
-COPY ./conf/www.conf /usr/local/etc/php-fpm.d/www.conf
-COPY ./conf/zz-docker.conf /usr/local/etc/php-fpm.d/zz-docker.conf
+# COPY ./conf/www.conf /usr/local/etc/php-fpm.d/www.conf
+# COPY ./conf/zz-docker.conf /usr/local/etc/php-fpm.d/zz-docker.conf
 
 WORKDIR /var/www
 

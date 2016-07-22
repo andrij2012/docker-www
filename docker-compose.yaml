@@ -30,6 +30,10 @@ mysql56:
 php70:
   build: ./php70
   container_name: php7-fpm
+  volumes:
+    - "./php70/conf/www.conf:/usr/local/etc/php-fpm.d/www.conf"
+    - "./php70/conf/zz-docker.conf:/usr/local/etc/php-fpm.d/zz-docker.conf"
+    - "./php70/conf/php.ini:/usr/local/etc/php/php.ini"
   volumes_from:
     - htdocs
   links:
@@ -42,6 +46,10 @@ php70:
 php56:
   build: ./php56
   container_name: php5-fpm
+  volumes:
+    - "./php56/conf/www.conf:/usr/local/etc/php-fpm.d/www.conf"
+    - "./php56/conf/zz-docker.conf:/usr/local/etc/php-fpm.d/zz-docker.conf"
+    - "./php56/conf/php.ini:/usr/local/etc/php/php.ini"
   volumes_from:
     - htdocs
   links:
