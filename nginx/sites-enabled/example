@@ -17,6 +17,7 @@ server {
     # To use php7 uncomment next line
     # fastcgi_pass  php7-fpm:9001;
     fastcgi_pass  php5-fpm:9000;
+    fastcgi_read_timeout 200;
     fastcgi_index index.php;
     fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
   }

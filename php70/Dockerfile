@@ -1,7 +1,7 @@
 FROM php:7.0.5-fpm
 RUN apt-get update && apt-get install -y apt-utils wget curl libfreetype6-dev libjpeg62-turbo-dev \
                                          libmcrypt-dev libpng12-dev libxml2-dev git vim \
-                                         libgraphicsmagick1-dev libmagickwand-dev imagemagick graphicsmagick \
+                                         libgraphicsmagick1-dev libmagickwand-dev imagemagick graphicsmagick sudo \
  && rm -r /var/lib/apt/lists/*
 
 # Install required PHP extension
@@ -28,7 +28,7 @@ RUN php -r "readfile('https://getcomposer.org/installer');" > composer-setup.php
  && php composer-setup.php \
  && php -r "unlink('composer-setup.php');" \
  && mv composer.phar /usr/bin/composer \
- && useradd -ms /bin/bash www
+ && useradd -ms /bin/bash www && echo "www:root" | chpasswd && adduser www sudo
 
 USER www
 
