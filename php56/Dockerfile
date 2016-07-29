@@ -1,7 +1,8 @@
 FROM php:5.6-fpm
 RUN apt-get update && apt-get install -y apt-utils wget curl libfreetype6-dev libjpeg62-turbo-dev \
                                          libmcrypt-dev libpng12-dev libxml2-dev git vim \
-                                         libgraphicsmagick1-dev libmagickwand-dev --no-install-recommends imagemagick graphicsmagick sudo \
+                                         libgraphicsmagick1-dev libmagickwand-dev --no-install-recommends \
+                                         ghostscript libgs-dev imagemagick graphicsmagick sudo \
  && rm -r /var/lib/apt/lists/* \
  && docker-php-ext-install -j$(nproc) mcrypt soap xml zip mysqli json \
  && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \

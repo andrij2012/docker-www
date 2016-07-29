@@ -1,7 +1,8 @@
 FROM php:7.0.5-fpm
 RUN apt-get update && apt-get install -y apt-utils wget curl libfreetype6-dev libjpeg62-turbo-dev \
                                          libmcrypt-dev libpng12-dev libxml2-dev git vim \
-                                         libgraphicsmagick1-dev libmagickwand-dev imagemagick graphicsmagick sudo \
+                                         libgraphicsmagick1-dev libmagickwand-dev --no-install-recommends \
+                                         ghostscript libgs-dev imagemagick graphicsmagick sudo \
  && rm -r /var/lib/apt/lists/*
 
 # Install required PHP extension
