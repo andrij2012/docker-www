@@ -55,6 +55,7 @@ php56:
     - htdocs
   links:
     - mysql56
+    - solr
   ports:
     - "9000:9000"
   environment:
@@ -78,6 +79,19 @@ htdocs:
   volumes:
     - "./htdocs/data:/var/www"
   tty: true
+solr:
+  image: writl/solr-typo3
+  container_name: solr
+  ports:
+    - "8282:8080"
+  volumes:
+    - "./htdocs/data/typo3/kriwan/solr-tomcat:/opt/solr-tomcat"
+  volumes_from: 
+    - htdocs
+  environment:
+    TERM: xterm
+
+
 
 # node:
 #   build: ./node
