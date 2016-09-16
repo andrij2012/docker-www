@@ -18,7 +18,7 @@ nginx:
 
 mysql56:
   build: ./mysql56
-  container_name: mysql56
+  container_name: mysql
   ports:
     - "3306:3306"
   environment:
@@ -30,7 +30,7 @@ mysql56:
 
 php70:
   build: ./php70
-  container_name: php7-fpm
+  container_name: php7
   volumes:
     - "./php70/conf/www.conf:/usr/local/etc/php-fpm.d/www.conf"
     - "./php70/conf/zz-docker.conf:/usr/local/etc/php-fpm.d/zz-docker.conf"
@@ -39,14 +39,19 @@ php70:
     - htdocs
   links:
     - mysql56
+    - solr
   ports:
     - "9001:9001"
   environment:
     TERM: xterm
+  extra_hosts:
+    - "open-xchange.lh:172.17.0.7"
+    - "kriwan.lh:172.17.0.7"
+    - "kriwan-staging.lh:172.17.0.7"
 
 php56:
   build: ./php56
-  container_name: php5-fpm
+  container_name: php5
   volumes:
     - "./php56/conf/www.conf:/usr/local/etc/php-fpm.d/www.conf"
     - "./php56/conf/zz-docker.conf:/usr/local/etc/php-fpm.d/zz-docker.conf"
@@ -60,6 +65,10 @@ php56:
     - "9000:9000"
   environment:
     TERM: xterm
+  extra_hosts:
+    - "open-xchange.lh:172.14.0.7"
+    - "kriwan.lh:172.17.0.7"
+    - "kriwan-staging.lh:172.17.0.7"
 
 phpmyadmin:
   image: phpmyadmin/phpmyadmin
