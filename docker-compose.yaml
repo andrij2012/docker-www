@@ -32,6 +32,8 @@ php70:
   build: ./php70
   container_name: php7
   volumes:
+    - "${HOME}/.ssh:/home/www/.ssh:ro"
+    - "${SSH_AUTH_SOCK}:/tmp/agent.sock"
     - "./php70/conf/www.conf:/usr/local/etc/php-fpm.d/www.conf"
     - "./php70/conf/zz-docker.conf:/usr/local/etc/php-fpm.d/zz-docker.conf"
     - "./php70/conf/php.ini:/usr/local/etc/php/php.ini"
@@ -44,6 +46,7 @@ php70:
     - "9001:9001"
   environment:
     TERM: xterm
+    SSH_AUTH_SOCK: "/tmp/agent.sock"
   extra_hosts:
     - "open-xchange.lh:172.17.0.7"
     - "kriwan.lh:172.17.0.7"
