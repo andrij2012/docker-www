@@ -80,7 +80,7 @@ phpmyadmin:
   links:
     - mysql56
   environment:
-    PMA_HOST: mysql56
+    PMA_HOST: mysql
 
 htdocs:
   build: ./htdocs
