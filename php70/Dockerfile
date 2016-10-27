@@ -1,4 +1,4 @@
-FROM php:7.0.5-fpm
+FROM php:7.0.12-fpm
 RUN apt-get update && apt-get install -y wget \
                                          curl \
                                          libfreetype6-dev \
@@ -27,11 +27,9 @@ RUN apt-get update && apt-get install -y wget \
                                       json \
                                       opcache \
                                       pdo_mysql \
-                                      gd 
-                                      #\
- # && pecl install xdebug 
- # \
- #&& docker-php-ext-enable xdebug
+                                      gd \
+ && pecl install xdebug \
+ && docker-php-ext-enable xdebug
 
 WORKDIR /var/www
 

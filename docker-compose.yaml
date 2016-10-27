@@ -11,7 +11,6 @@ nginx:
   links:
     - "php70"
     - "php56"
-    # - "node"
   volumes_from:
     - htdocs
   restart: always
@@ -42,15 +41,12 @@ php70:
   links:
     - mysql56
     - solr
+    - mailhog
   ports:
     - "9001:9001"
   environment:
     TERM: xterm
     SSH_AUTH_SOCK: "/tmp/agent.sock"
-  extra_hosts:
-    - "open-xchange.lh:172.17.0.7"
-    - "kriwan.lh:172.17.0.7"
-    - "kriwan-staging.lh:172.17.0.7"
 
 php56:
   build: ./php56
@@ -64,15 +60,12 @@ php56:
   links:
     - mysql56
     - solr
+    - mailhog
   ports:
     - "9000:9000"
   environment:
     TERM: xterm
-  extra_hosts:
-    - "open-xchange.lh:172.14.0.7"
-    - "kriwan.lh:172.17.0.7"
-    - "kriwan-staging.lh:172.17.0.7"
-
+    
 phpmyadmin:
   image: phpmyadmin/phpmyadmin
   container_name: phpmyadmin
@@ -91,27 +84,31 @@ htdocs:
   volumes:
     - "./htdocs/data:/var/www"
   tty: true
+
+mailhog:
+  container_name: mailhog
+  image: mailhog/mailhog
+  expose:
+    - "1025"
+    - "8025"
+  ports:
+    - "4900:8025"
+
 solr:
   image: writl/solr-typo3
   container_name: solr
   ports:
     - "8282:8080"
-  volumes:
-    - "./htdocs/data/typo3/kriwan/solr-tomcat:/opt/solr-tomcat"
   volumes_from: 
     - htdocs
   environment:
     TERM: xterm
-
-
 
 # node:
 #   build: ./node
 #   container_name: node
 #   volumes_from:
 #     - htdocs
-#   links:
-#     - "redis:redis"
 #   ports:
 #     - "3000:3000"
 

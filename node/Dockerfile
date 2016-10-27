@@ -2,6 +2,6 @@ FROM node
 
 MAINTAINER Andrii Valkiv "andrij2012@gmail.com"
 
-WORKDIR /var/www/example
+RUN npm install gulp less -g
 
-CMD ["node", "./socket.js"]
+WORKDIR /var/www
